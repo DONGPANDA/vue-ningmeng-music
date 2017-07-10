@@ -1,15 +1,23 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import Hello from '@/components/Hello'
-
-Vue.use(Router)
-
-export default new Router({
+import VueRouter from 'vue-router'
+import Recommond from 'components/recommond/recommond'
+import Rank from 'components/rank/rank'
+import Singer from 'components/singer/singer'
+Vue.use(VueRouter)
+export default new VueRouter({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'Hello',
-      component: Hello
+      path: '/recommond',
+      component: Recommond
+    },
+    {
+      path: '/rank',
+      component: Rank
+    },
+    {
+      path: '/singer',
+      component: Singer
     }
   ]
 })
