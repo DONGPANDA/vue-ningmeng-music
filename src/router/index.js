@@ -18,6 +18,10 @@ export default new VueRouter({
     {
       path: '/singer',
       component: Singer
+    },
+    {
+      path: '*',
+      redirect: '/recommond'
     }
   ]
 })
