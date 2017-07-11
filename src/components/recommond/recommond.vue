@@ -1,6 +1,6 @@
 <template>
   <div class="recommond">
-    <div class="slider-wrapper">
+    <div class="slider-wrapper" v-if="recommondData.length">
       <slider>
         <div v-for="item in recommondData">
           <a :href="item.linkUrl">
