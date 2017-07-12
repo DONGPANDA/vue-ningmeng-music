@@ -56,7 +56,8 @@
           snap: true,
           snapLoop: this.loop,
           snapThreshold: 0.3,
-          snapSpeed: 400
+          snapSpeed: 400,
+          click: true
         })
         this.slider.on('scrollEnd', () => {
           let pageIndex = this.slider.getCurrentPage().pageX
@@ -112,8 +113,8 @@
       white-space nowrap
       .slider-item
         text-align center
+        box-sizing: border-box
         overflow hidden
-        position relative
         float left
         a
           display block
@@ -121,7 +122,6 @@
           overflow: hidden
           text-decoration: none
           img
-            vertical-align middle
             display: block
             width: 100%
     .dots
