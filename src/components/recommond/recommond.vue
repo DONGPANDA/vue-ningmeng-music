@@ -18,8 +18,9 @@
             <span class="auther" v-html="diss.creator.name"></span>
         </li>
       </ul>
-      <h3>没有更多</h3>
+      <h3 v-show="dissList.length">没有更多</h3>
     </div>
+    <loading v-show="dissList.length===0"></loading>
   </div>
 </template>
 
@@ -27,6 +28,7 @@
   import Slider from 'base/slider/slider'
   import { getRecommond, getDiss } from 'api/recommond'
   import { ERR_OK } from 'api/config'
+  import Loading from 'base/loading/loading'
   export default {
     data() {
       return {
@@ -35,7 +37,8 @@
       }
     },
     components: {
-      Slider
+      Slider,
+      Loading
     },
     created() {
       this._getRecommond()
@@ -63,7 +66,6 @@
 
 <style scoped lang="less">
   .recommond {
-    background: rgba(0,0,0,0.05);
     width: 100%;
     .slider-wrapper {
       position: relative;
