@@ -1,34 +1,40 @@
 <template>
-  <div class="recommond">
-    <div class="slider-wrapper" v-if="recommondData.length">
-      <slider>
-        <div v-for="item in recommondData">
-          <a :href="item.linkUrl">
-            <img :src="item.picUrl" alt="">
-          </a>
+  <div class="recommend">
+    <scroll class="recommend-content" ref="scroll" :data="dissList">
+      <div>
+        <div class="slider-wrapper" v-if="recommondData.length">
+          <slider>
+            <div v-for="item in recommondData">
+              <a :href="item.linkUrl">
+                <img :src="item.picUrl" alt="">
+              </a>
+            </div>
+          </slider>
         </div>
-      </slider>
-    </div>
-    <div class="recommond-list">
-      <h1>热门歌单</h1>
-      <ul class="list-wrapper">
-        <li v-for="diss in dissList" class="diss">
-            <img :src="diss.imgurl" alt="">
-            <span class="title" v-html="diss.dissname"></span>
-            <span class="auther" v-html="diss.creator.name"></span>
-        </li>
-      </ul>
-      <h3 v-show="dissList.length">没有更多</h3>
-    </div>
-    <loading v-show="dissList.length===0"></loading>
+        <div class="recommond-list">
+          <h1>热门歌单</h1>
+          <ul class="list-wrapper">
+            <li v-for="diss in dissList" class="diss">
+              <img :src="diss.imgurl" alt="">
+              <i class="iconfont icon-play"></i>
+              <span class="title" v-html="diss.dissname"></span>
+              <span class="auther" v-html="diss.creator.name"></span>
+            </li>
+          </ul>
+          <h3 v-show="dissList.length">没有更多</h3>
+        </div>
+        <loading v-show="dissList.length===0"></loading>
+      </div>
+    </scroll>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Slider from 'base/slider/slider'
-  import { getRecommond, getDiss } from 'api/recommond'
+  import { getRecommond, getDiss } from 'api/recommend'
   import { ERR_OK } from 'api/config'
   import Loading from 'base/loading/loading'
+  import Scroll from 'base/scroll/scroll'
   export default {
     data() {
       return {
@@ -38,7 +44,8 @@
     },
     components: {
       Slider,
-      Loading
+      Loading,
+      Scroll
     },
     created() {
       this._getRecommond()
@@ -64,47 +71,66 @@
   }
 </script>
 
-<style scoped lang="less">
-  .recommond {
-    width: 100%;
-    .slider-wrapper {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      margin-bottom: 14px;
-    }
-    .recommond-list {
-      margin: 10px 10px;
-      h1{
-        margin: 10px 10px;
-      }
-      .list-wrapper{
+<style scoped lang="stylus">
+  .recommend {
+    position: fixed
+    width: 100%
+    top: 84px
+    bottom: 0
+    .recommend-content {
+      height 100%
+      overflow: hidden
+      .slider-wrapper {
+        position: relative;
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        .diss{
-          background: #fff;
-          padding: 1%;
-          width:46%;
-          margin-bottom: 10px;
-          img{
-            vertical-align: middle;
-            width: 100%;
-          }
-          span{
-            display: block;
-            width:100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space:nowrap;
-            padding: 2px;
+        overflow: hidden;
+        margin-bottom: 14px;
+      }
+      .recommond-list {
+        margin: 10px 10px;
+        h1 {
+          margin: 10px 10px;
+        }
+        .list-wrapper {
+          width: 100%;
+          display: flex;
+          flex-wrap wrap
+          justify-content: space-around;
+          .diss {
+            position: relative;
+            background: #fff;
+            padding: 1%;
+            width: 46%;
+            margin-bottom: 10px;
+            i {
+              border-radius: 50%;
+              position: absolute;
+              right: 10px;
+              font-size: 30px;
+              margin-top: -40px;
+              color: #fff;
+              background: rgba(0, 0, 0, 0.5);
+            }
+            img {
+              width: 100%;
+            }
+            span {
+              display: block;
+              width: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              padding: 2px;
+            }
+            .auther {
+              font-size: 14px;
+            }
           }
         }
-      }
-      h3{
-        text-align: center;
-        margin-bottom: 10px;
+        h3 {
+          text-align: center;
+          margin-bottom: 10px;
+        }
       }
     }
   }

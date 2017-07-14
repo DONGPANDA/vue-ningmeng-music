@@ -1,7 +1,6 @@
 <template>
   <div class="header">
     <i class="music_logo"></i>
-    <input class="search" type="text">
   </div>
 </template>
 
@@ -26,10 +25,4 @@
       bg-image('logo')
       background-size cover
       background-repeat no-repeat
-      text-indent -9999px
-    .search
-      width:60%
-      border-radius 9px
-      height: 30px
-      margin 7px 0 0 5px
 </style>

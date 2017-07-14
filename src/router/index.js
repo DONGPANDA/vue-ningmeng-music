@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Recommond from 'components/recommond/recommond'
 import Rank from 'components/rank/rank'
 import Singer from 'components/singer/singer'
+import Search from 'components/search/search'
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
@@ -18,6 +19,10 @@ export default new VueRouter({
     {
       path: '/singer',
       component: Singer
+    },
+    {
+      path: '/search',
+      component: Search
     },
     {
       path: '*',
