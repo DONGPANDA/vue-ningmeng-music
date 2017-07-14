@@ -1,5 +1,10 @@
 # QQ-music日志
 ## recommond
+
+### 轮播图使用better-scroll
+```
+npm install better-scroll --save
+```
 ### 拉取数据
 ```
 npm install jsonp --save
@@ -19,7 +24,7 @@ npm install jsonp --save
 如图:
 ![改后](./debugPic/style1.png)
 
-## 歌单Scroll组件的滚动问题
+### 歌单Scroll组件的滚动问题
 
 这个问题真的是无语
 
@@ -30,5 +35,7 @@ npm install jsonp --save
 ![滚动](./debugPic/style2.png)
 
 可以看到,scrollInit的时机是先于数据获取的,所以scroll没有被数据撑开,就不能滚动,第三行是我在scroll标签上绑了dissList,并watch他的状态,如果变化就调用scroll的refresh方法,然后就能撑开并滚动了
+
+总结: 这个问题和上个问题一样,因为数据get的过程是个异步过程,所以在挂载组件的时候要做相应处理
 
 
