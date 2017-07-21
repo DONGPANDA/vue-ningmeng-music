@@ -1,5 +1,5 @@
 <template>
-  <div class="player" ref="player" v-show="currentSong">
+  <div class="player" ref="player" v-show="playingList.length">
     <div class="full" v-show="fullScreen">
       <i @click="back" class="icon-fanhui"></i>
       <div class="background">
@@ -23,10 +23,14 @@
     data() {
       return {}
     },
+    created() {
+      console.log(1)
+    },
     computed: {
       ...mapGetters([
         'fullScreen',
         'playingList',
+        'currentIndex',
         'currentSong'
       ])
     },

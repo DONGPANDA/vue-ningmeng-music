@@ -17,6 +17,7 @@
       }
     },
     created() {
+      console.log(2)
       this._getSinger()
     },
     computed: {},
@@ -61,7 +62,6 @@
             continue
           }
           if (map[k].title === '热门') {
-            console.log(1)
             hot.push(map[k])
           } else {
             rest.push(map[k])

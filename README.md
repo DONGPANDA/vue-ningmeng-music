@@ -36,6 +36,19 @@ npm install jsonp --save
 
 可以看到,scrollInit的时机是先于数据获取的,所以scroll没有被数据撑开,就不能滚动,第三行是我在scroll标签上绑了dissList,并watch他的状态,如果变化就调用scroll的refresh方法,然后就能撑开并滚动了
 
-总结: 这个问题和上个问题一样,因为数据get的过程是个异步过程,所以在挂载组件的时候要做相应处理
+#### 总结
+这个问题和上个问题一样,因为数据get的过程是个异步过程,所以在挂载组件的时候要做相应处理
 
+### player页面image问题
+![player](./debugPic/play_bug1.png)
+
+我在app中引入了play这个组件,组件默认不显示,在singer-detial中点击了相应的歌曲,然后sing-list将点击的歌曲信息发射出去,music-list捕获信息,然后通过vuex的actions来对state进行一系列的修改,其中有对currentIndex(当前点击的歌曲的index)的更新,然后通过在player页面getters获取计算出的currentSong,player页面中的image依赖currentSong,这里报的错误显而易见是说刚开始的currentSong是undefined
+我开始找问题的时候,首先考虑的是,playingList被填充后才会显示player页面,但我项目开始run就报这个错了,这里我可能跟路由有点混,这里play组件挂在App上,不显示并不代表他没挂载,路由才是你切换到对应路径才开始挂载,切换到其他路径当前路由组件会销毁
+#### test: 
+  我在palyer组件created钩子函数console.log(1),singer路由组件created钩子函数console.log(2),
+  结果很明显,开始输出1,切到singer输出2
+  
+  然后我就去看定义在getters里面的currentSong,在这里我对所有state状态都进行了代理,getters是可以对state进行运算的,这里currentSong就是通过currentIndex计算出,然后我发现了问题...我是给currentSong 计算后的数据,可是我没有考虑当currentIndex也不存在时,currentSong的值...默认不存在给一个{}就好了
+#### 总结
+ 当getters里面的变量是通过其他state计算得出的时候,根据你使用的状态,要赋予默认值,这里和node里面从服务器读数据类似,如果我读到的是个空,我可以给他赋个[]
 
