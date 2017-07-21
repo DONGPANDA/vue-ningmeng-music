@@ -11,12 +11,12 @@
             </div>
           </slider>
         </div>
-        <div class="recommond-list">
+        <div class="recommond-list" v-show="recommondData.length">
           <h1>热门歌单</h1>
           <ul class="list-wrapper">
             <li v-for="diss in dissList" class="diss">
               <img :src="diss.imgurl" alt="">
-              <i class="iconfont icon-play"></i>
+              <i class="icon-bofang"></i>
               <span class="title" v-html="diss.dissname"></span>
               <span class="auther" v-html="diss.creator.name"></span>
             </li>
@@ -76,7 +76,7 @@
     position: fixed
     width: 100%
     top: 84px
-    bottom: 0
+    bottom: 10px
     .recommend-content {
       height 100%
       overflow: hidden

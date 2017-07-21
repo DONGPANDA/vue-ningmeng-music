@@ -1,0 +1,125 @@
+<template>
+  <scroller :data="songs" class="music-list">
+    <div class="back">
+      <i class="icon-fanhui" @click="goBack"></i>
+    </div>
+    <h1 v-html="title"></h1>
+    <div class="bg" :style="bgStyle" ref="bgImg">
+      <div class="filter"></div>
+      <div class="play">
+        <i class="icon-bofang"></i>
+      </div>
+    </div>
+    <div class="songList">
+      <song-list @select="selectItem" :data="songs"></song-list>
+    </div>
+    <loading class="loading" v-show="songs.length===0"></loading>
+  </scroller>
+</template>
+<script>
+  import Scroll from 'base/scroll/scroll'
+  import songList from 'base/song-list/song-list'
+  import Loading from 'base/loading/loading'
+  import { mapActions } from 'vuex'
+  export default {
+    props: {
+      bgImg: {
+        type: String,
+        default: ''
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      songs: {
+        type: Array,
+        default() {
+          return []
+        }
+      }
+    },
+    data() {
+      return {}
+    },
+    computed: {
+      bgStyle() {
+        return `background-image:url(${this.bgImg})`
+      }
+    },
+    components: {
+      Scroll,
+      songList,
+      Loading
+    },
+    methods: {
+      ...mapActions(['selectPlay']),
+      goBack() {
+        this.$router.back()
+      },
+      selectItem(song, index) {
+        this.selectPlay({list: this.songs, index})
+      }
+    }
+  }
+</script>
+<style scoped lang="stylus">
+  @import "~common/style/variable.styl"
+  .music-list {
+    position fixed
+    top: 0
+    left: 0
+    bottom 0
+    right 0
+    background: $color-background
+    .back i {
+      z-index 20
+      padding 5px 10px
+      position absolute
+      font-size 35px
+      color: #31c27c
+    }
+    h1 {
+      width: 100%
+      z-index: 10;
+      position absolute
+      top: 15px
+      font-size 20px
+      color: #FFF
+      text-align center
+    }
+    .bg {
+      position: relative
+      width: 100%
+      height: 0
+      padding-top: 70%
+      transform-origin: top
+      background-size: cover
+      .play {
+        font-size 60px;
+        position absolute;
+        right 0;
+        transform translateY(-100%)
+        color: #31c27c;
+        padding 20px 20px
+        span {
+          font-size 20px;
+        }
+      }
+      .filter {
+        position absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: rgba(0, 0, 0, .4);
+      }
+    }
+    .songlist {
+      padding-left 10px;
+      padding-right 10px;
+    }
+    .loading {
+      padding-top 30px;
+    }
+  }
+</style>

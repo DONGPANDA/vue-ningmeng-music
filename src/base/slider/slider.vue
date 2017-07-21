@@ -81,7 +81,11 @@
         }, this.interval)
       },
       dotsInit() {
-        this.dots = new Array(this.children.length)
+        let num = this.children.length;
+        if (this.loop) {
+          num -= 2;
+        }
+        this.dots = new Array(num)
       }
     },
     mounted() {

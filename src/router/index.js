@@ -4,6 +4,7 @@ import Recommond from 'components/recommond/recommond'
 import Rank from 'components/rank/rank'
 import Singer from 'components/singer/singer'
 import Search from 'components/search/search'
+import SingerDetial from 'components/singer-detial/singer-detial'
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
@@ -18,7 +19,13 @@ export default new VueRouter({
     },
     {
       path: '/singer',
-      component: Singer
+      component: Singer,
+      children: [
+        {
+          path: ':id',
+          component: SingerDetial
+        }
+      ]
     },
     {
       path: '/search',
