@@ -1,11 +1,99 @@
 <template>
-  <div>排行</div>
+  <div>
+    <scroller class="scroller" v-show="rankList">
+      <ul class="rank" v-for="rank in rankList" @click="select(rank)">
+        <img :src="rank.picUrl" alt="">
+        <div class="rankSong">
+          <span class="rankTitle" v-html="rank.topTitle"></span>
+          <li v-for="(song,index) in rank.songList"><span>{{index + 1}} {{song.songname}}-{{song.singername}}</span>
+          </li>
+        </div>
+        <span class="more"><i></i></span>
+      </ul>
+    </scroller>
+    <loading v-show="rankList.length===0"></loading>
+    <router-view></router-view>
+  </div>
 </template>
-
-<script type="text/ecmascript-6">
-
+<script>
+  import { getRank } from 'api/rank';
+  import { mapMutations } from 'vuex';
+  import Loading from 'base/loading/loading'
+  export default {
+    data() {
+      return {
+        rankList: []
+      }
+    },
+    created() {
+      this._getRank()
+    },
+    computed: {},
+    components: {
+      Loading
+    },
+    methods: {
+      ...mapMutations({
+        setTop: 'SET_TOPLIST'
+      }),
+      _getRank() {
+        getRank().then(res => {
+          this.rankList = res.data.topList
+        })
+      },
+      select(item) {
+        this.$router.push({
+          path: `/rank/${item.id}`
+        });
+        this.setTop(item);
+      }
+    }
+  }
 </script>
-
-<style lang="stylus" rel="stylesheet/stylus">
-
+<style scoped lang="stylus">
+  .scroller {
+    position: fixed;
+    top: 90px;
+    bottom: 0;
+    height auto;
+    overflow hidden;
+    width: 100%;
+    .rank {
+      background white;
+      width auto;
+      height 100px;
+      margin: 0 10px 10px 10px;
+      display flex;
+      img {
+        flex 0 0 100px;
+        width 100px;
+      }
+      div {
+        flex: 1
+        display flex;
+        flex-direction column;
+        justify-content space-around;
+        padding-left 10px;
+        li {
+          width 100%;
+          span {
+            display block;
+            width 250px;
+            font-size 14px;
+            text-overflow ellipsis;
+            overflow hidden;
+            white-space nowrap;
+          }
+        }
+      }
+      .more {
+        position fixed;
+        display block;
+        right 0;
+        top: 0;
+        width 30px;
+        height 100px;
+      }
+    }
+  }
 </style>

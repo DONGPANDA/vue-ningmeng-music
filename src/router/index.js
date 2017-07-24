@@ -6,6 +6,7 @@ import Singer from 'components/singer/singer'
 import Search from 'components/search/search'
 import SingerDetial from 'components/singer-detial/singer-detial'
 import Disc from 'components/disc/disc'
+import RankDetail from 'components/rank-detail/rank-detail'
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
@@ -22,7 +23,13 @@ export default new VueRouter({
     },
     {
       path: '/rank',
-      component: Rank
+      component: Rank,
+      children: [
+        {
+          path: ':id',
+          component: RankDetail
+        }
+      ]
     },
     {
       path: '/singer',

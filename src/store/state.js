@@ -9,5 +9,6 @@ export default {
   playingList: [],
   mode: playMode.sequence,
   currentIndex: -1,
-  disc: {a: 1}
+  disc: {a: 1},
+  topList: {}
 }

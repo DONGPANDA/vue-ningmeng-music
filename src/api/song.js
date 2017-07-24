@@ -26,7 +26,7 @@ export function createSong (musicData) {
     url: `http://ws.stream.qqmusic.qq.com/${musicData.songid}.m4a?fromtag=46`
   })
 }
-export function createSong1 (musicData) {
+export function createSongForDisc (musicData) {
   return new Song({
     id: musicData.id,
     mid: musicData.mid,

@@ -23,5 +23,8 @@ export const mutations = {
   },
   [types.SET_DISC](state, data) {
     state.disc = data
+  },
+  [types.SET_TOPLIST](state, data) {
+    state.topList = data
   }
 }

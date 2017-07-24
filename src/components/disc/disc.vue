@@ -7,7 +7,7 @@
   import musicList from 'components/music-list/music-list'
   import { mapGetters } from 'vuex';
   import { getDissList } from 'api/recommend';
-  import { createSong1 } from 'api/song'
+  import { createSongForDisc } from 'api/song'
   export default {
     data() {
       return {
@@ -29,13 +29,12 @@
           let data = JSON.parse(/jsonCallback\((.+)\)/.exec(res)[1]);
           console.log(data)
           this.songList = this.normalizeSong(data.cdlist[0].songlist)
-          console.log(this.songList)
         })
       },
       normalizeSong(list) {
         let ret = [];
         list.forEach(item => {
-          ret.push(createSong1(item))
+          ret.push(createSongForDisc(item))
         })
         return ret
       }

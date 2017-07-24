@@ -91,7 +91,7 @@
       position: relative
       width: 100%
       height: 0
-      padding-top: 90%
+      padding-top: 100%
       transform-origin: top
       background-size: cover
       .play {
