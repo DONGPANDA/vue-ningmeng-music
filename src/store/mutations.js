@@ -15,13 +15,13 @@ export const mutations = {
   [types.SET_PLAYINGLIST](state, list) {
     state.playingList = list
   },
-  [types.SET_SEQUENCELIST](state, data) {
-    state.sequenceList = data
-  },
   [types.SET_MODE](state, num) {
     state.mode = num
   },
   [types.SET_CURRENTINDEX](state, index) {
     state.currentIndex = index
+  },
+  [types.SET_DISC](state, data) {
+    state.disc = data
   }
 }

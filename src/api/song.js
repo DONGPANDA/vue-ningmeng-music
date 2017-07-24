@@ -26,6 +26,18 @@ export function createSong (musicData) {
     url: `http://ws.stream.qqmusic.qq.com/${musicData.songid}.m4a?fromtag=46`
   })
 }
+export function createSong1 (musicData) {
+  return new Song({
+    id: musicData.id,
+    mid: musicData.mid,
+    singer: filterSinger(musicData.singer),
+    name: musicData.name,
+    album: musicData.album.name,
+    duration: musicData.interval,
+    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.album.mid}.jpg?max_age=2592000`,
+    url: `http://ws.stream.qqmusic.qq.com/${musicData.id}.m4a?fromtag=46`
+  })
+}
 function filterSinger (singers) {
   let ret = []
   if (!singers) {

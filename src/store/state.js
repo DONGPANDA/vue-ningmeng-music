@@ -7,7 +7,7 @@ export default {
   playing: false,
   fullScreen: false,
   playingList: [],
-  sequenceList: [],
   mode: playMode.sequence,
-  currentIndex: -1
+  currentIndex: -1,
+  disc: {a: 1}
 }

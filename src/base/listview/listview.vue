@@ -5,7 +5,7 @@
         <h2 v-html="singerG.title"></h2>
         <ul>
           <li v-for="singer in singerG.items" class="singer" @click="chooseSinger(singer)">
-            <img :src="singer.url" alt="">
+            <img v-lazy="singer.url" alt="">
             <span v-html="singer.name"></span>
           </li>
         </ul>

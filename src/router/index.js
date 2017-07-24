@@ -5,13 +5,20 @@ import Rank from 'components/rank/rank'
 import Singer from 'components/singer/singer'
 import Search from 'components/search/search'
 import SingerDetial from 'components/singer-detial/singer-detial'
+import Disc from 'components/disc/disc'
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
   routes: [
     {
       path: '/recommond',
-      component: Recommond
+      component: Recommond,
+      children: [
+        {
+          path: ':id',
+          component: Disc
+        }
+      ]
     },
     {
       path: '/rank',

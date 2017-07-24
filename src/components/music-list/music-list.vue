@@ -3,9 +3,9 @@
     <div class="back">
       <i class="icon-fanhui" @click="goBack"></i>
     </div>
-    <h1 v-html="title"></h1>
     <div class="bg" :style="bgStyle" ref="bgImg">
       <div class="filter"></div>
+      <h1 v-html="title"></h1>
       <div class="play">
         <i class="icon-bofang"></i>
       </div>
@@ -79,22 +79,23 @@
       color: #31c27c
     }
     h1 {
-      width: 100%
-      z-index: 10;
+      width: 70%
       position absolute
-      top: 15px
+      left 0;
+      bottom 0;
       font-size 20px
       color: #FFF
-      text-align center
+      padding 20px 20px
     }
     .bg {
       position: relative
       width: 100%
       height: 0
-      padding-top: 70%
+      padding-top: 90%
       transform-origin: top
       background-size: cover
       .play {
+        z-index:100;
         font-size 60px;
         position absolute;
         right 0;

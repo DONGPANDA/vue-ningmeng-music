@@ -37,6 +37,19 @@ apiRouter.get('/getDiss',function (req,res) {
     console.log(err)
   })
 })
+apiRouter.get('/getDissList',function (req,res) {
+  var url='https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg';
+  axios.get(url,{
+    headers:{
+      referer:'https://y.qq.com/w/taoge.html'
+    },
+    params: req.query
+  }).then(response=>{
+    res.send(response.data)
+  }).catch(err=>{
+    console.log(err)
+  })
+})
 
 app.use('/api',apiRouter)
 

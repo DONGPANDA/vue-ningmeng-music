@@ -14,7 +14,7 @@
         <div class="recommond-list" v-show="recommondData.length">
           <h1>热门歌单</h1>
           <ul class="list-wrapper">
-            <li v-for="diss in dissList" class="diss">
+            <li v-for="diss in dissList" class="diss" @click="selectItem(diss)">
               <img :src="diss.imgurl" alt="">
               <i class="icon-bofang"></i>
               <span class="title" v-html="diss.dissname"></span>
@@ -26,6 +26,7 @@
         <loading v-show="dissList.length===0"></loading>
       </div>
     </scroll>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -35,6 +36,7 @@
   import { ERR_OK } from 'api/config'
   import Loading from 'base/loading/loading'
   import Scroll from 'base/scroll/scroll'
+  import { mapState, mapMutations } from 'vuex'
   export default {
     data() {
       return {
@@ -51,7 +53,11 @@
       this._getRecommond()
       this._getDiss()
     },
+    computed: {
+      ...mapState(['disc'])
+    },
     methods: {
+      ...mapMutations(['SET_DISC']),
       _getRecommond() {
         getRecommond().then(res => {
           if (ERR_OK === 0) {
@@ -62,10 +68,16 @@
       _getDiss() {
         getDiss().then(res => {
           if (ERR_OK === 0) {
+            console.log(res)
             this.dissList = res.data.list
-            console.log(this.dissList)
           }
         })
+      },
+      selectItem(item) {
+        this.$router.push({
+          path: `/recommond/${item.dissid}`
+        })
+        this['SET_DISC'](item)
       }
     }
   }

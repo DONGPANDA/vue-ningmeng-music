@@ -2,7 +2,7 @@
  * Created by 96004 on 2017/7/11.
  */
 import jsonp from 'common/js/jsonp'
-import { commonParams, options } from 'api/config'
+import { commonParams, options } from './config'
 import axios from 'axios'
 
 export function getRecommond () {
@@ -36,3 +36,25 @@ export function getDiss () {
     return res.data
   })
 }
+export function getDissList (disstid) {
+  const url = '/api/getDissList'
+  const data = Object.assign({}, commonParams, {
+    g_tk: 1394118960,
+    platform: 'yqq',
+    needNewCode: 1,
+    new_format: 1,
+    pic: 500,
+    disstid,
+    type: 1,
+    json: 1,
+    utf8: 1,
+    onlysong: 0,
+    nosign: 1
+  })
+  return axios.get(url, {
+    params: data
+  }).then(res => {
+    return res.data
+  })
+}
+
