@@ -18,7 +18,7 @@
 <script>
   import { getRank } from 'api/rank';
   import { mapMutations } from 'vuex';
-  import Loading from 'base/loading/loading'
+  import Loading from 'base/loading/loading';
   export default {
     data() {
       return {
