@@ -26,5 +26,8 @@ export const mutations = {
   },
   [types.SET_TOPLIST](state, data) {
     state.topList = data
+  },
+  [types.SET_PLAY_HISTORY](state,data) {
+    state.playHistory.unshift(data)
   }
 }

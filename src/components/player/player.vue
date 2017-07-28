@@ -35,11 +35,15 @@
         <div class="next" @click="nextSong">
           <i class="icon-28"></i>
         </div>
-        <div class="list">
+        <div @click="getList" class="list">
           <i class="icon-ttpodicon"></i>
         </div>
       </div>
     </div>
+    <scroller class="playList" v-show="listFlag">
+      <i @click="closeList" class="icon-guanbi"></i>
+      <song-list :data="playList" @select="selectList"></song-list>
+    </scroller>
     <div class="mini" v-show="!fullScreen&&playing">
       <img @click="full" class="miniP" :class="cdSpin" v-lazy="currentSong.image" alt="">
     </div>
@@ -50,12 +54,15 @@
   import { mapGetters, mapMutations } from 'vuex';
   import { playMode } from 'common/js/config';
   import { shuffle } from 'common/js/randomList';
-  import ProgressBar from 'base/progress-bar/progress-bar'
+  import ProgressBar from 'base/progress-bar/progress-bar';
+  import SongList from 'base/song-list/song-list';
   export default {
     data() {
       return {
         readyFlag: false,
-        currentTime: 0
+        currentTime: 0,
+        playList: [],
+        listFlag: false
       }
     },
     created() {
@@ -83,7 +90,8 @@
       }
     },
     components: {
-      ProgressBar
+      ProgressBar,
+      SongList
     },
     methods: {
       ...mapMutations({
@@ -91,7 +99,8 @@
         setPlaying: 'SET_PLAYING',
         setCurrentIndex: 'SET_CURRENTINDEX',
         setPlayMode: 'SET_MODE',
-        setPlayList: 'SET_PLAYINGLIST'
+        setPlayList: 'SET_PLAYINGLIST',
+        setPlayHistory: 'SET_PLAY_HISTORY'
       }),
       back() {
         this.setFullScreen(false);
@@ -154,7 +163,8 @@
         this.setCurrentIndex(index)
       },
       end() {
-        if (this.mode === playMode.loop) {
+        if (this.mode === playMode.loop ||
+          this.playingList.length===1) {
           this.loop()
         } else {
           this.nextSong()
@@ -185,6 +195,17 @@
         if (!this.playing) {
           this.play()
         }
+      },
+      getList() {
+        this.listFlag=true;
+        this.playList=this.playingList;
+      },
+      selectList(song) {
+        let index=this.playingList.findIndex(item=>item.id===song.id);
+        this.setCurrentIndex(index);
+      },
+      closeList() {
+        this.listFlag=false;
       }
     },
     watch: {
@@ -320,6 +341,19 @@
         }
       }
     }
+    .playList{
+      width: 100%;
+      position fixed;
+      top:50%;
+      bottom 0;
+      height auto;
+      background white;
+      i{
+        position absolute;
+        top:10px;
+        right:10px;
+      }
+    }
     .mini{
       .miniP {
         position absolute;
@@ -328,8 +362,7 @@
         margin-left -30px;
         width 60px
         box-sizing border-box;
-        border 3
-        px solid #31c27c;
+        border 3px solid #31c27c;
         border-radius 50%;
         animation: rotate 20s linear infinite;
         &.play {

@@ -4,14 +4,15 @@
         :on-infinite="getMore"
         :on-refresh="refresh"
       >
-        <song-list :data="list" @selectItem=""></song-list>
+        <song-list :data="list" @select="selectItem"></song-list>
       </scroller>
     </div>
 </template>
 <script>
   import {getSearch} from 'api/search';
   import {createSong} from 'api/song';
-  import SongList from 'base/song-list/song-list'
+  import SongList from 'base/song-list/song-list';
+  import {mapGetters,mapActions,mapMutations} from 'vuex';
   export default {
     props:{
       query:{
@@ -27,13 +28,18 @@
         singer: {}
       }
     },
-    computed: {},
+    computed: {
+      ...mapGetters(['playHistory'])
+    },
     components: {
       SongList
     },
     methods: {
+      ...mapActions(['selectPlay']),
+      ...mapMutations({
+        setPlayHistory: 'SET_PLAY_HISTORY'
+      }),
       _getSearch(query) {
-        console.log(query)
         getSearch(query,this.page,true,this.prepage).then(res=>{
           let data=this.normalizeSong(JSON.parse(/.+\(({.+})\)$/.exec(res)[1]).data.song.list);
           this.list=[...this.list,...data];
@@ -60,6 +66,18 @@
         setTimeout(()=>{
           this.$refs.scroller.finishPullToRefresh(true)
         },300)
+      },
+      selectItem(song) {
+        let list=this.playHistory;
+        let flag=list.find(item=>item.id===song.id)
+        if(flag){
+          let index=list.findIndex(item=>item.id===song.id)
+          this.selectPlay({list,index})
+        }else{
+          this.setPlayHistory(song);
+          let list=this.playHistory;
+          this.selectPlay({list,index:0})
+        }
       }
     },
     watch:{

@@ -10,5 +10,6 @@ export default {
   mode: playMode.sequence,
   currentIndex: -1,
   disc: {a: 1},
-  topList: {}
+  topList: {},
+  playHistory:[]
 }
