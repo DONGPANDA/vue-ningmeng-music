@@ -23,6 +23,7 @@ npm install jsonp --save
 
 如图:
 ![改后](./debugPic/style1.png)
+![改后](./debugPic/style3.png)
 
 ### 歌单Scroll组件的滚动问题
 
