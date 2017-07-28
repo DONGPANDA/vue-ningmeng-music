@@ -1,5 +1,4 @@
 # QingNing-music日志
-## recommond
 
 ### 轮播图使用better-scroll
 ```
