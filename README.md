@@ -1,4 +1,4 @@
-# QingNing-music日志
+# NingMeng-music日志
 
 ### 轮播图使用better-scroll
 ```
