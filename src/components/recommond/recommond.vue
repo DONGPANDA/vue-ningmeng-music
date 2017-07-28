@@ -119,9 +119,9 @@
               position: absolute;
               right: 10px;
               font-size: 30px;
-              margin-top: -40px;
+              bottom: 48px;
               color: #fff;
-              background: rgba(0, 0, 0, 0.5);
+              background: rgba(0, 0, 0, 0.2);
             }
             img {
               width: 100%;

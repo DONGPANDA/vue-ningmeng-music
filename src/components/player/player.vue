@@ -328,7 +328,8 @@
         margin-left -30px;
         width 60px
         box-sizing border-box;
-        border 5px solid #31c27c;
+        border 3
+        px solid #31c27c;
         border-radius 50%;
         animation: rotate 20s linear infinite;
         &.play {

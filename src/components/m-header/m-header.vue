@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <i class="music_logo"></i>
+    <i class="icon-Lemon-copy"></i>
   </div>
 </template>
 
@@ -11,18 +11,15 @@
 <style scoped lang="stylus" rel="stylesheet/stylus">
   @import "~common/style/variable"
   @import "~common/style/mixin"
-  .header
+  .header {
     position relative
     height 44px
-    font-size 0
+    line-height 44px;
     background $color-green
-    .music_logo
-      float left
-      display block
-      width: 90px
-      height 25px
-      margin 9px 0 0 10px
-      bg-image('logo')
-      background-size cover
-      background-repeat no-repeat
+    i {
+      font-size 40px;
+      color: #fdff37
+    }
+  }
+
 </style>

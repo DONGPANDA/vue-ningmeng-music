@@ -50,7 +50,32 @@ apiRouter.get('/getDissList',function (req,res) {
     console.log(err)
   })
 })
-
+apiRouter.get('/getHotTag',function (req,res) {
+  var url='https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg';
+  axios.get(url,{
+    headers:{
+      referer:'https://y.qq.com'
+    },
+    params: req.query
+  }).then(response=>{
+    res.send(response.data)
+  }).catch(err=>{
+    console.log(err)
+  })
+})
+apiRouter.get('/getSearch',function (req,res) {
+  var url='https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp';
+  axios.get(url,{
+    headers:{
+      referer:'https://y.qq.com'
+    },
+    params: req.query
+  }).then(response=>{
+    res.send(response.data)
+  }).catch(err=>{
+    console.log(err)
+  })
+})
 app.use('/api',apiRouter)
 
 var compiler = webpack(webpackConfig)

@@ -60,15 +60,14 @@
     width: 100%;
     .rank {
       background white;
-      width auto;
-      height 100px;
       margin: 0 10px 10px 10px;
       display flex;
       img {
-        flex 0 0 100px;
         width 100px;
+        height 100px;
       }
       div {
+        width 70%;
         flex: 1
         display flex;
         flex-direction column;
@@ -77,8 +76,8 @@
         li {
           width 100%;
           span {
-            display block;
-            width 250px;
+            display inline-block;
+            width 90%;
             font-size 14px;
             text-overflow ellipsis;
             overflow hidden;
