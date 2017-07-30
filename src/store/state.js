@@ -11,5 +11,6 @@ export default {
   currentIndex: -1,
   disc: {a: 1},
   topList: {},
-  playHistory:[]
+  playHistory:[],
+  user: false
 }

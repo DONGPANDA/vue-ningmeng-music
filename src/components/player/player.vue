@@ -9,7 +9,7 @@
         <span v-html="currentSong.name"></span>
         <span v-html="currentSong.singer"></span>
       </div>
-      <div class="middle">
+      <div class="middle" @click="closeList">
         <div>
           <img class="cd" :class="cdSpin" v-lazy="currentSong.image" alt="">
         </div>
@@ -40,8 +40,8 @@
         </div>
       </div>
     </div>
+    <i v-show="listFlag" @click="closeList" class="icon-guanbi"></i>
     <scroller class="playList" v-show="listFlag">
-      <i @click="closeList" class="icon-guanbi"></i>
       <song-list :data="playList" @select="selectList"></song-list>
     </scroller>
     <div class="mini" v-show="!fullScreen&&playing">
@@ -104,6 +104,7 @@
       }),
       back() {
         this.setFullScreen(false);
+        this.listFlag=false;
       },
       full() {
         this.setFullScreen(true);
@@ -227,6 +228,7 @@
 </script>
 <style scoped lang="stylus">
   .player {
+    transition: all 1s;
     .full {
       position: fixed;
       left: 0;
@@ -261,11 +263,15 @@
         color: #fff;
         border-bottom 0.1px solid rgba(255, 255, 255, 0.2)
         span {
+          margin 0 20%;
           font-size 18px;
           height 30px;
           line-height 30px;
           text-align center;
-          width 100%;
+          width auto;
+          text-overflow ellipsis;
+          overflow hidden;
+          white-space nowrap;
           display block;
         }
       }
@@ -348,11 +354,14 @@
       bottom 0;
       height auto;
       background white;
-      i{
-        position absolute;
-        top:10px;
-        right:10px;
-      }
+    }
+    .icon-guanbi{
+      z-index:10;
+      position absolute;
+      top:50%;
+      right:0;
+      padding-top:10px;
+      padding-right:10px;
     }
     .mini{
       .miniP {
@@ -374,10 +383,20 @@
       }
     }
   }
-
-  @keyframes rotate
-    0%
+  @keyframes screenIo {
+    0%{
+      transform: translateY(100%);
+    }
+    100%{
+      transform: translateY(-100%);
+    }
+  }
+  @keyframes rotate {
+    0% {
       transform: rotate(0)
-    100%
+    }
+    100% {
       transform: rotate(360deg)
+    }
+  }
 </style>
