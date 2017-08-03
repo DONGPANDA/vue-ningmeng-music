@@ -30,7 +30,7 @@ export const mutations = {
   [types.SET_PLAY_HISTORY](state,data) {
     state.playHistory.unshift(data)
   },
-  [types.SET_USER](state,data){
-    state.user=data
+  [types.SET_USER](state,data) {
+    state.userD=data
   }
 }

@@ -1,24 +1,16 @@
 <template>
   <div class="header">
-    <i class="icon-Lemon-copy"></i>
+    <img src="./logo.png" alt="">
     <span>Lemon音乐</span>
-    <i @click="userTab" class="icon-gerenzhongxin"></i>
+    <router-link to="/user"><i class="icon-gerenzhongxin"></i></router-link>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapMutations,mapGetters} from 'vuex';
   export default{
     computed:{
-      ...mapGetters(['user'])
     },
     methods:{
-      ...mapMutations({
-        setUser:'SET_USER'
-      }),
-      userTab() {
-        this.setUser(!this.user);
-      }
     }
   }
 </script>
@@ -31,15 +23,21 @@
     height 44px
     line-height 44px;
     background $color-green
+    img{
+      margin: 3px 5px;
+      width:38px;
+      height:34px;
+    }
     span{
-      font-size 20px;
+      font-size 18px;
       color: white;
+      padding-left 5px;
       position absolute;
       top:0;
       left 40px;
     }
     i {
-      font-size 40px;
+      font-size 30px;
       color: white;
     }
     .icon-gerenzhongxin{

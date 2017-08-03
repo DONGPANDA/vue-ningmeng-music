@@ -12,5 +12,5 @@ export default {
   disc: {a: 1},
   topList: {},
   playHistory:[],
-  user: false
+  userD: false
 }

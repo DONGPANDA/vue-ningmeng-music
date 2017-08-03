@@ -3,12 +3,11 @@
     <m-header></m-header>
     <tab></tab>
     <transition name="route">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
     </transition>
     <player></player>
-    <user></user>
   </div>
 </template>
 
@@ -16,18 +15,18 @@
   import MHeader from 'components/m-header/m-header'
   import Tab from 'components/tab/tab'
   import Player from 'components/player/player.vue'
-  import User from 'components/user/user.vue'
+  import UserDetail from 'components/user-detail/user-detail.vue';
   export default{
     components: {
       MHeader,
       Tab,
       Player,
-      User
+      UserDetail
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
   .route-enter {
     transform: translate(100%);
   }
@@ -38,5 +37,12 @@
 
   .route-leave-to {
     transform: translate(-100%);
+  }
+  .detial-enter, .detial-leave-to {
+    transform: translate(100%)
+  }
+
+  .detial-enter-active, .detial-leave-active {
+    transition: all 0.3s;
   }
 </style>

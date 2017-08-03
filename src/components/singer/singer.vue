@@ -28,9 +28,7 @@
       ...mapMutations([types.SET_SINGER]),
       _getSinger() {
         getSinger().then(res => {
-          console.log(res)
           this.singers = this._sortSinger(res.data.list)
-          console.log(this.singers)
         })
       },
       _sortSinger(data) {

@@ -40,10 +40,12 @@
         </div>
       </div>
     </div>
-    <i v-show="listFlag" @click="closeList" class="icon-guanbi"></i>
-    <scroller class="playList" v-show="listFlag">
-      <song-list :data="playList" @select="selectList"></song-list>
-    </scroller>
+    <transition name="playList">
+      <scroller class="playList" v-show="listFlag">
+        <i v-show="listFlag" @click="closeList" class="icon-guanbi"></i>
+        <song-list :data="playList" @select="selectList"></song-list>
+      </scroller>
+    </transition>
     <div class="mini" v-show="!fullScreen&&playing">
       <img @click="full" class="miniP" :class="cdSpin" v-lazy="currentSong.image" alt="">
     </div>
@@ -354,14 +356,14 @@
       bottom 0;
       height auto;
       background white;
-    }
-    .icon-guanbi{
-      z-index:10;
-      position absolute;
-      top:50%;
-      right:0;
-      padding-top:10px;
-      padding-right:10px;
+      .icon-guanbi{
+        z-index:10;
+        position absolute;
+        top:0;
+        right:0;
+        padding-top:10px;
+        padding-right:10px;
+      }
     }
     .mini{
       .miniP {
@@ -382,13 +384,14 @@
         }
       }
     }
-  }
-  @keyframes screenIo {
-    0%{
-      transform: translateY(100%);
+    .playList-enter{
+      transform translateY(100%)
     }
-    100%{
-      transform: translateY(-100%);
+    .playList-leave-to{
+      transform translateY(100%)
+    }
+    .playList-enter-active,.playList-leave-active{
+      transition: all 0.3s;
     }
   }
   @keyframes rotate {
