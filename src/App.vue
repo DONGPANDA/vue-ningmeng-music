@@ -15,13 +15,11 @@
   import MHeader from 'components/m-header/m-header'
   import Tab from 'components/tab/tab'
   import Player from 'components/player/player.vue'
-  import UserDetail from 'components/user-detail/user-detail.vue';
   export default{
     components: {
       MHeader,
       Tab,
-      Player,
-      UserDetail
+      Player
     }
   }
 </script>

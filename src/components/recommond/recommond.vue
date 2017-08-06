@@ -68,7 +68,6 @@
       _getDiss() {
         getDiss().then(res => {
           if (ERR_OK === 0) {
-            console.log(res)
             this.dissList = res.data.list
           }
         })

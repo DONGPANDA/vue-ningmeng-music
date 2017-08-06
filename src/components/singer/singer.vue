@@ -17,7 +17,6 @@
       }
     },
     created() {
-      console.log(2)
       this._getSinger()
     },
     computed: {},

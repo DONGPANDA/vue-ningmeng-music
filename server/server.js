@@ -25,10 +25,10 @@ app.post('/userApi/signup', function (req, res) {
   let user=req.body;
   User.findOne({username:user.username},function (err,oldUser) {
     if(oldUser){
-      res.send({title:'用户名已经存在',code:0});
+      res.send({title:'用户名已经存在',code:1});
     }else{
       User.create(user,function (err,user) {
-        res.send({title:'注册成功,请登录',code:1});
+        res.send({title:'注册成功,请登录',code:0});
       })
     }
   })
@@ -37,10 +37,9 @@ app.post('/userApi/signin',function (req, res) {
   let user=req.body;
   User.findOne({username:user.username},function (err, user) {
     if(user){
-      req.session.user=user;
-      res.redirect('')
+      res.send({code:0,user})
     }else{
-      res.send('用户不存在');
+      res.send({title:'用户不存在',code:1});
     }
   })
 });

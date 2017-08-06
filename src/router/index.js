@@ -8,8 +8,6 @@ import SingerDetial from 'components/singer-detial/singer-detial'
 import Disc from 'components/disc/disc'
 import RankDetail from 'components/rank-detail/rank-detail';
 import User from 'components/user/user';
-import UserDetail from 'components/user-detail/user-detail';
-import UserSign from 'components/user-sign/user-sign';
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
@@ -50,13 +48,7 @@ export default new VueRouter({
     },
     {
       path: '/user',
-      component:User,
-      children: [
-        {
-          path: 'userSign',
-          component: UserSign
-        }
-      ]
+      component:User
     },
     {
       path: '*',
