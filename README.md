@@ -1,43 +1,39 @@
 # NingMeng-music日志
 
 ## 结构
-├─server 
-
-├─src
-
-│  ├─api
-
-│  ├─base
-
-│  │  ├─listview
-│  │  ├─loading
-│  │  ├─pop-box
-│  │  ├─progress-bar
-│  │  ├─scroll
-│  │  ├─search-bar
-│  │  ├─slider
-│  │  └─song-list
-│  ├─common
-│  │  ├─fonts
-│  │  ├─image
-│  │  ├─js
-│  │  └─style
-│  ├─components
-│  │  ├─disc
-│  │  ├─m-header
-│  │  ├─music-list
-│  │  ├─player
-│  │  ├─rank
-│  │  ├─rank-detail
-│  │  ├─recommond
-│  │  ├─search
-│  │  ├─singer
-│  │  ├─singer-detial
-│  │  ├─suggest
-│  │  ├─tab
-│  │  └─user
-│  ├─router
-│  └─store
+├─server <br>
+├─src<br>
+│  ├─api<br>
+│  ├─base<br>
+│  │  ├─listview<br>
+│  │  ├─loading<br>
+│  │  ├─pop-box<br>
+│  │  ├─progress-bar<br>
+│  │  ├─scroll<br>
+│  │  ├─search-bar<br>
+│  │  ├─slider<br>
+│  │  └─song-list<br>
+│  ├─common<br>
+│  │  ├─fonts<br>
+│  │  ├─image<br>
+│  │  ├─js<br>
+│  │  └─style<br>
+│  ├─components<br>
+│  │  ├─disc<br>
+│  │  ├─m-header<br>
+│  │  ├─music-list<br>
+│  │  ├─player<br>
+│  │  ├─rank<br>
+│  │  ├─rank-detail<br>
+│  │  ├─recommond<br>
+│  │  ├─search<br>
+│  │  ├─singer<br>
+│  │  ├─singer-detial<br>
+│  │  ├─suggest<br>
+│  │  ├─tab<br>
+│  │  └─user<br>
+│  ├─router<br>
+│  └─store<br>
 
 ## 插件
 
