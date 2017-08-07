@@ -1,16 +1,65 @@
 # NingMeng-music日志
 
-### 轮播图使用better-scroll
-```
-npm install better-scroll --save
-```
-### 拉取数据
-```
-npm install jsonp --save
-```
-[jsonp地址](https://github.com/webmodules/jsonp)
-> 对jsop插件进行一次封装,来获取数据,主要是处理url和传入的参数,并且指定callback
+## 结构
+├─server 
+├─src
+│  ├─api
+│  ├─base
+│  │  ├─listview
+│  │  ├─loading
+│  │  ├─pop-box
+│  │  ├─progress-bar
+│  │  ├─scroll
+│  │  ├─search-bar
+│  │  ├─slider
+│  │  └─song-list
+│  ├─common
+│  │  ├─fonts
+│  │  ├─image
+│  │  ├─js
+│  │  └─style
+│  ├─components
+│  │  ├─disc
+│  │  ├─m-header
+│  │  ├─music-list
+│  │  ├─player
+│  │  ├─rank
+│  │  ├─rank-detail
+│  │  ├─recommond
+│  │  ├─search
+│  │  ├─singer
+│  │  ├─singer-detial
+│  │  ├─suggest
+│  │  ├─tab
+│  │  └─user
+│  ├─router
+│  └─store
 
+## 插件
+
+```
+    "axios": "^0.16.2",
+    "better-scroll": "^0.3.4",
+    "body-parser": "^1.17.2",
+    "connect-mongo": "^1.3.2",
+    "express-session": "^1.15.4",
+    "jsonp": "^0.2.1",
+    "mongoose": "^4.11.5",
+    "session": "^0.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-lazyload": "^1.0.6",
+    "vue-scroller": "^2.2.1",
+    "vuex": "^2.3.1"
+```
+## 待优化
+### (2017-8-4)
+- scroller路由切换问题,上拉刷新提示问题,noMoreData提示问题,回到顶部问题
+- 用户登录,用户密码格式验证format函数,根据用户名总动生成头像,用户输入时虚拟键盘问题,记录用户登录状态 session
+- play组件添加歌词功能
+- 搜索列表增加 歌手项
+
+## 问题解决
 ### 图片挂载问题
 > 设置了图片的样式和slider的宽度以后 图片的大小没有变化还是很大  
 
