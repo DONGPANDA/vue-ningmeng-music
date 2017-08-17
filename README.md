@@ -1,5 +1,6 @@
 # NingMeng-music日志
-
+# demo 展示
+![demo](./debugPic/demo.gif)
 ## 结构
 ├─server <br>
 ├─src<br>
