@@ -18,7 +18,7 @@
         <span>我喜欢的</span>
         <span>最近播放</span>
       </div>
-      <div class="likeList">
+      <div class="List">
         <span v-show="user.list"></span>
       </div>
     </div>
