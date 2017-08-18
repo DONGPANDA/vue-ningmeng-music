@@ -51,7 +51,9 @@
     },
     created() {
       this._getRecommond()
-      this._getDiss()
+      this.$nextTick(()=>{
+        this._getDiss()
+      })
     },
     computed: {
       ...mapState(['disc'])

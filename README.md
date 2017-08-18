@@ -107,6 +107,51 @@
  这里我用了扩展运算符,将新旧数组展开到一个新数组,再渲染到页面,因为是使用的qq音乐的api,所以对每次获取的数据要做处理,给api传的data中有page和prepage两个参数,每次上拉时对这两个参数进行重新计算,因为每一页获取的歌曲数是10条,所以我用已经获取的搜索结果length除以10,来和page比较,得出page和prepage
  然后写完之后调试,第一个问题出现了,当我修改query(搜索的值)时,上一次搜索的数据还在,这个一看就明白了,所以我在watch里面对搜索list结果进行了清空
  接着调试上拉刷新正常,但是同样是在修改搜索值时,显示的内容感觉丢失了,就是本来搜周杰伦应该哗哗哗的刷新个没完,但是我刷了几回就没有了,仔细想想,可能同样是变量的初始化问题,我在改变query后page应该从1开始计算,如果不清空就会在上次搜索基础上累加,所以对page和prepage进行了初始化,ok
+ 
+ ### fastclick input框点击不能正常focus
+ 
+ 我来先来说说点击穿透是个什么玩意儿
+ - 举个栗子,比如我现在有两个页面,A和B,两个页面各有一个按钮,页面叠在一起,A在上层,且两个按钮btn1和btn2位置一样, 点击btn1会让A隐藏B页面显示,但是因为在移动端touch时间有300ms的延迟(safari的双击事件决定),所以当btn1的touch时间触发,A隐藏,300ms之后触发click事件,此时显示的是B,所以相同位置的btn2的点击事件触发
+ - 移动端touch事件都是触发click事件过程: touchstart->touchmove->touchend->mousedown->mouseup->click
+ - 真是因为这种机制导致点击穿透
+ 
+ 我在项目中使用fastclick后,有个bug,input框的点击获取焦点,变得迟钝,点击事件变长才能获取焦点,然后咋办,谷歌呗,结果是fastclick类似的bug很多,具体解决方案,我们来看一下源码中怎么做的处理
+ ```javascript
+  // Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
+  			// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
+  			if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+  				this.targetElement = null;
+  				return false;
+  			}
+  
+  			this.focus(targetElement);
+  			this.sendClick(targetElement, event);
+  
+  			// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
+  			// Also this breaks opening selects when VoiceOver is active on iOS6, iOS7 (and possibly others)
+  			if (!deviceIsIOS || targetTagName !== 'select') {
+  				this.targetElement = null;
+  				event.preventDefault();
+  			}
+  
+  			return false;
+  		}
+
+```
+ 大概意思就是如果我的点击时间大于100ms,不会触发this.focus,而是直接触发原生click事件,如果小于100时由于e.preventDefault()阻止默认行为,focus事件未触发,如果想触发我们需要对代码就行修改
+ ```javascript
+  if (!deviceIsIOS || targetTagName !== 'select' && TargetTagName !== 'input') {
+            this.targetElement = null;
+            event.preventDefault();
+          }
+```
+是input的时候不进行阻止,问题就解决了
+
+解决点击穿透的方法有很多,这里做一下总结
+1. fastclick
+2. 在下层元素添加pointer-events:none禁止点击事件,300ms后恢复
+3. 给上层元素消失添加动画,可以是opacity慢慢置为0,动画时间为300ms;
+4. 在两层元素之间添加一个遮挡层,点击上层300ms以后遮挡层消失
 
 ### 最近播放历史的问题
  新增了palyHistory的state,记录已经播放过的歌曲
